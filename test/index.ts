@@ -108,6 +108,7 @@ describe("typeData spec", () => {
     it('signTypedData and recoverTypedSignature', () => {
         const address = '0x29C76e6aD8f28BB1004902578Fb108c507Be341b';
         const privKeyHex = '4af1bceebf7f3634ec3cff8a2c38e51178d5d4ce585c52d6043e5e2cc3418bb0';
+        const refSig = '0x6788ed43187435f321349f4a8736c989062431c45e460e04b5e10f46d66efeac0cd8c164c436e40f4a37ea18a196dc0ed67deece2e0a212fc8c70f0cfc086c821c';
 
         const privKey = Buffer.from(privKeyHex, 'hex');
 
@@ -115,5 +116,6 @@ describe("typeData spec", () => {
         const recovered = recoverTypedData(testTypedData, signature);
 
         expect(recovered).to.equal(address);
+        expect(signature).to.equal(refSig);
     })
 });
