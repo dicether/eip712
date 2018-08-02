@@ -6,3 +6,5 @@ export function signTypedData(privateKey: Buffer, msgParams: { data: Data }): st
 
 export type Recover = {data: Data, sig: string};
 export function recoverTypedSignature(rec: Recover): string;
+
+export function concatSig(v: Buffer, r: Buffer, s: Buffer): string

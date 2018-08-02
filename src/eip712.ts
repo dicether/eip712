@@ -1,6 +1,7 @@
 // EIP 712 encoding
 // Most taken from https://github.com/ethereum/EIPs/blob/master/assets/eip-712/Example.js
 
+import * as ethSigUtil from "eth-sig-util";
 import * as abi from "ethereumjs-abi";
 import * as ethUtil from "ethereumjs-util";
 
@@ -140,7 +141,7 @@ export function typedDataHash(typedData: TypedData) {
 export function signTypedData(typedData: TypedData, privateKey: Buffer) {
     const hash = typedDataHash(typedData);
     const sig = ethUtil.ecsign(hash, privateKey);
-    return ethUtil.toRpcSig(sig.v, sig.r, sig.s);
+    return ethSigUtil.concatSig(sig.v, sig.r, sig.s);
 }
 
 export function recoverTypedData(typedData: TypedData, signature: string) {
