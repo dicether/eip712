@@ -3,16 +3,16 @@ import {toBuffer} from "ethereumjs-util";
 
 
 import {
+    hashTypedData,
+    hashTypedDataLegacy,
     recoverTypedData,
-    recoverTypedDataOld,
+    recoverTypedDataLegacy,
     signTypedData,
-    signTypedDataOld,
-    typedDataHash,
-    typedDataHashOld
+    signTypedDataLegacy
 } from "../src";
 
 
-describe("old typeData spec", () => {
+describe("Legacy typeData spec", () => {
     it('typedSignatureHash', () => {
         const typedData = [
             {
@@ -27,13 +27,13 @@ describe("old typeData spec", () => {
             },
         ];
 
-        const hash = typedDataHashOld(typedData);
+        const hash = hashTypedDataLegacy(typedData);
         const refHash = toBuffer('0xf7ad23226db5c1c00ca0ca1468fd49c8f8bbc1489bc1c382de5adc557a69c229');
 
         expect(hash).to.deep.equal(refHash);
     });
 
-    it("signTypedData and recoverTypedSignature old", () => {
+    it("signTypedData and recoverTypedSignature Legacy", () => {
         const address = '0x29C76e6aD8f28BB1004902578Fb108c507Be341b';
         const privKeyHex = '4af1bceebf7f3634ec3cff8a2c38e51178d5d4ce585c52d6043e5e2cc3418bb0';
 
@@ -52,8 +52,8 @@ describe("old typeData spec", () => {
             },
         ];
 
-        const signature = signTypedDataOld(typedData, privKey);
-        const recovered = recoverTypedDataOld(typedData, signature);
+        const signature = signTypedDataLegacy(typedData, privKey);
+        const recovered = recoverTypedDataLegacy(typedData, signature);
 
         expect(recovered).to.equal(address);
     })
@@ -99,7 +99,7 @@ const testTypedData = {
 
 describe("typeData spec", () => {
     it('typedSignatureHash', () => {
-        const hash = typedDataHash(testTypedData);
+        const hash = hashTypedData(testTypedData);
         const hashRef = toBuffer('0xbe609aee343fb3c4b28e1df9e632fca64fcfaede20f02e86244efddf30957bd2');
 
         expect(hash).to.deep.equal(hashRef);

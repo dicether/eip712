@@ -1,6 +1,7 @@
-export {recoverTypedData, signTypedData, typedDataHash} from "./eip712";
+export * from "./eip712";
 export {
-    recoverTypedData as recoverTypedDataOld,
-    signTypedData as signTypedDataOld,
-    typedDataHash as typedDataHashOld
-}from "./eip712Old"
+    recoverTypedData as recoverTypedDataLegacy,
+    signTypedData as signTypedDataLegacy,
+    hashTypedData as hashTypedDataLegacy,
+    TypedData as TypedDataLegacy,
+}from "./eip712Legacy"

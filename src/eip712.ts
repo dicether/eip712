@@ -128,7 +128,7 @@ function structHash(primaryType: string, types: Types, data: Data) {
     return ethUtil.sha3(encodeData(primaryType, types, data));
 }
 
-export function typedDataHash(typedData: TypedData) {
+export function hashTypedData(typedData: TypedData) {
     return ethUtil.sha3(
         Buffer.concat([
             Buffer.from('1901', 'hex'),
@@ -139,13 +139,13 @@ export function typedDataHash(typedData: TypedData) {
 }
 
 export function signTypedData(typedData: TypedData, privateKey: Buffer) {
-    const hash = typedDataHash(typedData);
+    const hash = hashTypedData(typedData);
     const sig = ethUtil.ecsign(hash, privateKey);
     return ethSigUtil.concatSig(sig.v, sig.r, sig.s);
 }
 
 export function recoverTypedData(typedData: TypedData, signature: string) {
-    const hash = typedDataHash(typedData);
+    const hash = hashTypedData(typedData);
     const sigParams = ethUtil.fromRpcSig(signature);
     const pubKey = ethUtil.ecrecover(hash, sigParams.v, sigParams.r, sigParams.s);
     const address = ethUtil.pubToAddress(pubKey);

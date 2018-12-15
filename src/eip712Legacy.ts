@@ -3,7 +3,7 @@ import * as ethUtil from "ethereumjs-util";
 
 export type TypedData = { type: string, name: string, value: any }[]
 
-export function typedDataHash(typedData: TypedData) {
+export function hashTypedData(typedData: TypedData) {
     return ethUtil.toBuffer(ethSigUtil.typedSignatureHash(typedData));
 }
 
