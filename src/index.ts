@@ -4,4 +4,4 @@ export {
     signTypedData as signTypedDataLegacy,
     hashTypedData as hashTypedDataLegacy,
     TypedData as TypedDataLegacy,
-}from "./eip712Legacy"
+} from "./eip712Legacy";

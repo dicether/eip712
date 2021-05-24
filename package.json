@@ -6,9 +6,23 @@
   "types": "lib/src/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "lint": "tslint --project .",
-    "test": "mocha ./lib/test/**/*.js"
+    "lint": "eslint \"./**/*.ts\"",
+    "prettier": "prettier --write \"./**/*.ts\"",
+    "test": "mocha ./lib/test/**/*.js",
+    "prepare": "husky install"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
+  },
+  "prettier": "@dicether/prettier-config",
   "keywords": [
     "EIP712",
     "signTypedData"
@@ -17,18 +31,24 @@
   "license": "MIT",
   "dependencies": {
     "eth-sig-util": "^1.4.2",
-    "ethereumjs-abi": "^0.6.5",
-    "ethereumjs-util": "^5.2.0"
+    "ethereumjs-abi": "^0.6.8",
+    "ethereumjs-util": "^5.2.1"
   },
   "devDependencies": {
-    "@types/chai": "^4.1.4",
+    "@dicether/eslint-config": "^1.0.0",
+    "@dicether/prettier-config": "^1.0.0",
+    "@types/chai": "^4.2.18",
     "@types/ethereumjs-util": "^5.2.0",
-    "@types/mocha": "^5.2.2",
-    "chai": "^4.1.2",
+    "@types/mocha": "^5.2.7",
+    "@typescript-eslint/eslint-plugin": "^4.25.0",
+    "@typescript-eslint/parser": "^4.25.0",
+    "chai": "^4.3.4",
+    "eslint": "^7.27.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "husky": "^6.0.0",
+    "lint-staged": "^11.0.0",
     "mocha": "^5.2.0",
-    "tslint": "^5.10.0",
-    "tslint-config-prettier": "^1.13.0",
-    "tslint-config-standard": "^7.0.0",
+    "prettier": "^2.3.0",
     "typescript": "^2.9.2"
   }
 }
