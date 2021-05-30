@@ -30,16 +30,16 @@
   "author": "dicether",
   "license": "MIT",
   "dependencies": {
-    "eth-sig-util": "^1.4.2",
+    "eth-sig-util": "^3.0.1",
     "ethereumjs-abi": "^0.6.8",
-    "ethereumjs-util": "^5.2.1"
+    "ethereumjs-util": "^7.0.10"
   },
   "devDependencies": {
     "@dicether/eslint-config": "^1.0.0",
     "@dicether/prettier-config": "^1.0.0",
     "@types/chai": "^4.2.18",
     "@types/ethereumjs-util": "^5.2.0",
-    "@types/mocha": "^5.2.7",
+    "@types/mocha": "^8.2.2",
     "@typescript-eslint/eslint-plugin": "^4.25.0",
     "@typescript-eslint/parser": "^4.25.0",
     "chai": "^4.3.4",
@@ -47,8 +47,8 @@
     "eslint-plugin-prettier": "^3.4.0",
     "husky": "^6.0.0",
     "lint-staged": "^11.0.0",
-    "mocha": "^5.2.0",
+    "mocha": "^8.4.0",
     "prettier": "^2.3.0",
-    "typescript": "^2.9.2"
+    "typescript": "^4.3.2"
   }
 }

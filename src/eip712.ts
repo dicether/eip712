@@ -80,7 +80,7 @@ function encodeType(primaryType: string, types: Types) {
 }
 
 function typeHash(primaryType: string, types: Types) {
-    return ethUtil.sha3(encodeType(primaryType, types));
+    return ethUtil.keccakFromString(encodeType(primaryType, types));
 }
 
 function encodeData(primaryType: string, types: Types, data: Data) {
@@ -98,13 +98,17 @@ function encodeData(primaryType: string, types: Types, data: Data) {
             throw Error(`Invalid typed data! Data for ${field.name} not found!`);
         }
 
-        if (field.type === "string" || field.type === "bytes") {
+        if (field.type === "bytes") {
             encTypes.push("bytes32");
-            const valueHash = ethUtil.sha3(value as string | Buffer);
+            const valueHash = ethUtil.keccakFromHexString(value as string);
+            encValues.push(valueHash);
+        } else if (field.type === "string") {
+            encTypes.push("bytes32");
+            const valueHash = ethUtil.keccakFromString(value as string);
             encValues.push(valueHash);
         } else if (types[field.type] !== undefined) {
             encTypes.push("bytes32");
-            const valueHash = ethUtil.sha3(encodeData(field.type, types, value as Data));
+            const valueHash = ethUtil.keccak(encodeData(field.type, types, value as Data));
             encValues.push(valueHash);
         } else if (field.type.lastIndexOf("]") === field.type.length - 1) {
             throw new Error("Arrays currently not implemented!");
@@ -122,11 +126,11 @@ function encodeData(primaryType: string, types: Types, data: Data) {
 }
 
 function structHash(primaryType: string, types: Types, data: Data): Buffer {
-    return ethUtil.sha3(encodeData(primaryType, types, data)) as Buffer;
+    return ethUtil.keccak(encodeData(primaryType, types, data)) as Buffer;
 }
 
 export function hashTypedData(typedData: TypedData): Buffer {
-    return ethUtil.sha3(
+    return ethUtil.keccak(
         Buffer.concat([
             Buffer.from("1901", "hex"),
             structHash("EIP712Domain", typedData.types, typedData.domain),
@@ -138,7 +142,7 @@ export function hashTypedData(typedData: TypedData): Buffer {
 export function signTypedData(typedData: TypedData, privateKey: Buffer): string {
     const hash = hashTypedData(typedData);
     const sig = ethUtil.ecsign(hash, privateKey);
-    return ethSigUtil.concatSig(sig.v, sig.r, sig.s);
+    return ethSigUtil.concatSig(Buffer.from([sig.v]), sig.r, sig.s);
 }
 
 export function recoverTypedData(typedData: TypedData, signature: string): string {
