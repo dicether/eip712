@@ -1,61 +1,7 @@
 import {expect} from "chai";
 import {toBuffer} from "ethereumjs-util";
 
-import {
-    hashTypedData,
-    hashTypedDataLegacy,
-    recoverTypedData,
-    recoverTypedDataLegacy,
-    signTypedData,
-    signTypedDataLegacy,
-} from "../src";
-
-describe("Legacy typeData spec", () => {
-    it("typedSignatureHash", () => {
-        const typedData = [
-            {
-                type: "string",
-                name: "message",
-                value: "Hi, Alice!",
-            },
-            {
-                type: "uint8",
-                name: "value",
-                value: 10,
-            },
-        ];
-
-        const hash = hashTypedDataLegacy(typedData);
-        const refHash = toBuffer("0xf7ad23226db5c1c00ca0ca1468fd49c8f8bbc1489bc1c382de5adc557a69c229");
-
-        expect(hash).to.deep.equal(refHash);
-    });
-
-    it("signTypedData and recoverTypedSignature Legacy", () => {
-        const address = "0x29C76e6aD8f28BB1004902578Fb108c507Be341b";
-        const privKeyHex = "4af1bceebf7f3634ec3cff8a2c38e51178d5d4ce585c52d6043e5e2cc3418bb0";
-
-        const privKey = Buffer.from(privKeyHex, "hex");
-
-        const typedData = [
-            {
-                type: "string",
-                name: "message",
-                value: "Hi, Alice!",
-            },
-            {
-                type: "uint8",
-                name: "value",
-                value: 10,
-            },
-        ];
-
-        const signature = signTypedDataLegacy(typedData, privKey);
-        const recovered = recoverTypedDataLegacy(typedData, signature);
-
-        expect(recovered).to.equal(address);
-    });
-});
+import {hashTypedData, recoverTypedData, signTypedData} from "../src";
 
 const testTypedData = {
     types: {
