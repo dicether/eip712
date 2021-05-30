@@ -29,6 +29,10 @@
   ],
   "author": "dicether",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dicether/eip712"
+  },
   "dependencies": {
     "eth-sig-util": "^3.0.1",
     "ethereumjs-abi": "^0.6.8",
