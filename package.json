@@ -1,6 +1,6 @@
 {
   "name": "@dicether/eip712",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "EIP 712 implementation",
   "main": "lib/src/index.js",
   "types": "lib/src/index.d.ts",
