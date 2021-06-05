@@ -27,8 +27,11 @@ jobs:
           name: Build
           command: npm run build
       - run:
-          name: Test
-          command: npm run lint               
+          name: Lint
+          command: npm run lint
+      - run:
+          name: Prettier-Check
+          command: npm run prettier-check
       - run:
           name: Test
           command: npm test          

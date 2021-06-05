@@ -8,6 +8,7 @@
     "build": "tsc",
     "lint": "eslint \"./**/*.ts\"",
     "prettier": "prettier --write \"./**/*.ts\"",
+    "prettier-check": "prettier --check \"./**/*.ts\"",
     "test": "mocha ./lib/test/**/*.js",
     "prepare": "husky install"
   },
